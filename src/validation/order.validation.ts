@@ -34,3 +34,12 @@ export const createOrderSchema = z.object({
     total: z.number().positive(),
   }),
 });
+
+export const updateOrderStatusSchema = z.object({
+  params: z.object({
+    id: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid MongoDB ID"),
+  }),
+  body: z.object({
+    status: z.enum(["placed", "processing", "shipped", "delivered"]),
+  }),
+});

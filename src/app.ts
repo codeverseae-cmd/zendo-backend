@@ -13,6 +13,14 @@ export const createApp = () => {
 
   // app.use(helmet());
   app.use(cors());
+
+  // Raw body MUST be registered before express.json() so that the webhook
+  // handler receives the unparsed Buffer needed for HMAC-SHA256 verification.
+  app.use(
+    "/api/orders/webhook/tabby",
+    express.raw({ type: "application/json" })
+  );
+
   app.use(express.json({ limit: "1mb" }));
   app.use(express.urlencoded({ extended: true }));
 

@@ -26,8 +26,17 @@ export interface OrderDocument extends Document {
   shippingCost: number;
   tax: number;
   total: number;
-  paymentStatus: "pending" | "paid" | "failed";
-  orderStatus: "placed" | "processing" | "shipped" | "delivered";
+  paymentStatus: "pending" | "paid" | "failed" | "cancelled";
+  orderStatus:
+  | "pending_payment"
+  | "placed"
+  | "processing"
+  | "shipped"
+  | "delivered";
+  tabbyPaymentId?: string;
+  checkoutUrl?: string;
+  paymentLinkStatus: "none" | "active" | "used" | "expired";
+  paymentLinkExpiresAt?: Date;
   createdAt: Date;
 }
 
@@ -60,13 +69,27 @@ const orderSchema = new Schema<OrderDocument>(
     total: Number,
     paymentStatus: {
       type: String,
-      enum: ["pending", "paid", "failed"],
+      enum: ["pending", "paid", "failed", "cancelled"],
       default: "pending",
     },
     orderStatus: {
       type: String,
-      enum: ["placed", "processing", "shipped", "delivered"],
-      default: "placed",
+      enum: ["pending_payment", "placed", "processing", "shipped", "delivered"],
+      default: "pending_payment",
+    },
+    tabbyPaymentId: {
+      type: String,
+    },
+    checkoutUrl: {
+      type: String,
+    },
+    paymentLinkStatus: {
+      type: String,
+      enum: ["none", "active", "used", "expired"],
+      default: "none",
+    },
+    paymentLinkExpiresAt: {
+      type: Date,
     },
   },
   {

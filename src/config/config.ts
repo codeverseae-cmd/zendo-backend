@@ -17,6 +17,10 @@ const config: {
   adminPassword: string | undefined;
   jwtSecret: string;
   jwtExpire: string;
+  tabbyPublicKey: string;
+  tabbySecretKey: string;
+  tabbyMerchantCode: string;
+  tabbyWebhookSecret: string;
 } = {
   env,
   isDev: env === "development",
@@ -27,6 +31,10 @@ const config: {
   adminPassword: process.env.ADMIN_PASSWORD,
   jwtSecret: process.env.JWT_SECRET ?? "secret",
   jwtExpire: process.env.JWT_EXPIRE ?? "7d",
+  tabbyPublicKey: process.env.TABBY_PUBLIC_KEY ?? "",
+  tabbySecretKey: process.env.TABBY_SECRET_KEY ?? "",
+  tabbyMerchantCode: process.env.TABBY_MERCHANT_CODE ?? "",
+  tabbyWebhookSecret: process.env.TABBY_WEBHOOK_SECRET ?? "",
 };
 
 export type AppConfig = typeof config;
