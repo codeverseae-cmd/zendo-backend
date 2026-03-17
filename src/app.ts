@@ -17,7 +17,7 @@ export const createApp = () => {
   // Raw body MUST be registered before express.json() so that the webhook
   // handler receives the unparsed Buffer needed for HMAC-SHA256 verification.
   app.use(
-    "/api/orders/webhook/tabby",
+    "/api/order/webhook/tabby",
     express.raw({ type: "application/json" })
   );
 

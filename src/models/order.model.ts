@@ -34,6 +34,8 @@ export interface OrderDocument extends Document {
   | "shipped"
   | "delivered";
   tabbyPaymentId?: string;
+  tamaraPaymentId?: string;
+  paymentMethod: "tabby" | "tamara";
   checkoutUrl?: string;
   paymentLinkStatus: "none" | "active" | "used" | "expired";
   paymentLinkExpiresAt?: Date;
@@ -79,6 +81,14 @@ const orderSchema = new Schema<OrderDocument>(
     },
     tabbyPaymentId: {
       type: String,
+    },
+    tamaraPaymentId: {
+      type: String,
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["tabby", "tamara"],
+      default: "tabby",
     },
     checkoutUrl: {
       type: String,

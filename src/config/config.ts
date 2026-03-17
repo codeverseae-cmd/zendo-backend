@@ -21,6 +21,10 @@ const config: {
   tabbySecretKey: string;
   tabbyMerchantCode: string;
   tabbyWebhookSecret: string;
+  tamaraApiUrl: string;
+  tamaraApiToken: string;
+  tamaraWebhookSecret: string;
+  tamaraNotificationToken: string;
 } = {
   env,
   isDev: env === "development",
@@ -35,6 +39,10 @@ const config: {
   tabbySecretKey: process.env.TABBY_SECRET_KEY ?? "",
   tabbyMerchantCode: process.env.TABBY_MERCHANT_CODE ?? "",
   tabbyWebhookSecret: process.env.TABBY_WEBHOOK_SECRET ?? "",
+  tamaraApiUrl: process.env.TAMARA_API_URL ?? "https://api.tamara.co",
+  tamaraApiToken: process.env.TAMARA_API_TOKEN ?? "",
+  tamaraWebhookSecret: process.env.TAMARA_WEBHOOK_SECRET ?? "",
+  tamaraNotificationToken: process.env.TAMARA_NOTIFICATION_TOKEN ?? "",
 };
 
 export type AppConfig = typeof config;

@@ -34,6 +34,23 @@ export const handleTabbyWebhook = async (req: Request, res: Response) => {
 };
 
 /**
+ * Tamara webhook handler.
+ */
+export const handleTamaraWebhook = async (req: Request, res: Response) => {
+  const token =
+    (req.query.tamaraToken as string) ??
+    (req.headers["authorization"] as string)?.split(" ")[1] ??
+    "";
+  const payload = req.body;
+
+  // Ack immediately
+  res.status(200).json({ received: true });
+
+  // Process asynchronously
+  await orderService.handleTamaraWebhook(token, payload);
+};
+
+/**
  * Retry payment for a previously failed order.
  * Does NOT create a new order — only a new Tabby checkout session.
  */

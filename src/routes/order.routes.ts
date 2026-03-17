@@ -11,6 +11,7 @@ import {
   getOrders,
   handlePaymentLink,
   handleTabbyWebhook,
+  handleTamaraWebhook,
   retryPayment,
   syncPaymentStatus,
   updateOrderStatus,
@@ -24,6 +25,7 @@ const router = Router();
 // Must be registered BEFORE /:id — otherwise Express treats "webhook" as an id.
 // Raw body buffering is set up in app.ts for this path.
 router.post("/webhook/tabby", asyncHandler(handleTabbyWebhook));
+router.post("/webhook/tamara", asyncHandler(handleTamaraWebhook));
 
 // ─── / ───────────────────────────────────────────────────────────────────────
 router
